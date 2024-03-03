@@ -1,0 +1,12 @@
+{
+    "ts-node": {
+        "esm": false
+    },
+    "module": "commonjs",
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "outDir": "dist"
+    },
+}
