@@ -1,0 +1,47 @@
+.upload_main{
+    margin-top: 59px;
+    height: calc(100vh - 59px);
+    background: linear-gradient(#f5f5fa, #edf0fa, #e4ebfa);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+    gap: 30px;
+}
+
+.upload_head{
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.upload_text{
+    font-size: 22px;
+    width: 70%;
+    color: #707078;
+}
+
+.upload_btn{
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+    padding-left: 42px !important;
+    padding-right: 42px !important;
+    font-size: 24px !important;
+    border-radius: 12px !important;
+    text-transform: capitalize !important;
+}
+
+.previewd_image{
+    width: 400px;
+    height: 400px;
+    object-fit: contain;
+}
+
+
+@media screen and (max-width:700px) {
+    .upload_main{
+        margin-top: 64px;
+        padding: 15px;
+        height: calc(100vh - 64px);
+        }
+    }    
