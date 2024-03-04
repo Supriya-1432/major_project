@@ -17,7 +17,7 @@ import { json } from 'body-parser';
 export default class Main extends Server {
   PORT: any;
   dbUrl = 'mongodb://' + config.DB_HOST + '/' + config.DB_NAME;
-  whitelist = [/http:\/\/localhost:[0-9]+/, /inncircles\.com$/]
+  whitelist = [/http:\/\/localhost:[0-9]+/]
 
 
   constructor() {
