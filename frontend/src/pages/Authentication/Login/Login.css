@@ -1,0 +1,95 @@
+.login_main{
+    height: 100vh;
+    /* display: grid;
+    grid-template-columns: 60% 40%; */
+    overflow-x: hidden;
+}
+
+.image-bg{
+    background-image: url('../../../images/gif-upload.gif');
+    background-size: cover; /* or 'contain' or other values based on your preference */
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/* .image-bg::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #3d3878;
+    opacity: 0.5;
+    width: 60%;
+    height: 100%;
+    z-index: 100;
+} */
+
+.image-hyp{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:1000;
+}
+
+
+.login_submain{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_details{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    /* width: 50%; */
+}
+
+.head{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.foot{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    line-height: 25px;
+}
+
+.input{
+    border: 1px solid #DADADA;
+    border-radius: 2px;
+    width: 100%;
+    padding: 8px;
+}
+
+.field{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn{
+    padding: 10px;
+    border-radius: 2px;
+    letter-spacing: 2px;
+    background-color: #47474f;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+}
