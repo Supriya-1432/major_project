@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import Login from './pages/Authentication/Login/Login';
 import Register from './pages/Authentication/Register/Register';
 import Upload from './pages/Upload/Upload';
+import Profile from './pages/Profile/Profile';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path='/' element={<Navbar />} >
         <Route index element={<Home />} />
         <Route path='/upload' element={<Upload />} />
+        <Route path='/profile' element={<Profile />} />
       </Route>
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />

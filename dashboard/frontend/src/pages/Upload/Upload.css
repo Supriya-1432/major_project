@@ -1,6 +1,7 @@
 .upload_main{
     margin-top: 59px;
-    height: calc(100vh - 59px);
+    min-height: calc(100vh - 59px);
+    max-height: max-content;
     background: linear-gradient(#f5f5fa, #edf0fa, #e4ebfa);
     display: flex;
     flex-direction: column;
@@ -21,6 +22,63 @@
     color: #707078;
 }
 
+.image_preview{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.image_sub_preview{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.image_preview_text{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.status{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.infected{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+.image_preview_btn{
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    background-color:  #4d90fe ;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    width: 150px;
+    transition: background-color 0.5s ease;
+  }
+  
+  .image_preview_btn:hover{
+    background-color: #2c64c0;
+  }
+
+.image{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
 .upload_btn{
     padding-top: 24px !important;
     padding-bottom: 24px !important;
@@ -31,11 +89,6 @@
     text-transform: capitalize !important;
 }
 
-.previewd_image{
-    width: 400px;
-    height: 400px;
-    object-fit: contain;
-}
 
 
 @media screen and (max-width:700px) {

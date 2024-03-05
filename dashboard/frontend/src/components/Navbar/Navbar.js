@@ -26,7 +26,7 @@ export default function Navbar(){
     setToggle((prevToggle) => setToggle(!prevToggle))
   }
 
-  const t= true;
+  const t= !true;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   
@@ -44,19 +44,19 @@ export default function Navbar(){
       <ModeContext.Provider>
         <div className='nav_main_desktop'>
           <div className='nav_sub_desktop'>
-            <div className='nav_sub_desktop_logo_text'>
+            <div className='nav_sub_desktop_logo_text' onClick={()=>navigate('/')} >
               <img src={LogoBlue} alt='icon' loading='lazy' className='nav_logo_desktop' />
-              <p className='nav_logo_text'>X-Ray Detect</p>
+              <p className='nav_logo_text'>Lung-Disease Detect</p>
             </div>
             <p className='nav_upload_text' onClick={()=>navigate('/upload')}>Upload</p>
           </div>
           { t ?
             <div className='nav_sub_desktop'>
-              <button type='button' className='nav_btn_desktop'>
-                <p onClick={()=>navigate('/login')}>Login</p>
+              <button type='button' className='nav_btn_desktop' onClick={()=>navigate('/login')}>
+                <p >Login</p>
               </button>
-              <button type='button' className='nav_btn_desktop'>
-                <p onClick={()=>navigate('/register')}>Signup</p>
+              <button type='button' className='nav_btn_desktop' onClick={()=>navigate('/register')}>
+                <p >Signup</p>
               </button>
               </div> : 
             <div className='nav_sub_desktop'>
@@ -86,17 +86,12 @@ export default function Navbar(){
                 }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
+                sx={{zIndex:'10000000'}}
               >
                 <MenuItem onClick={handleClose}>
-                  <div className='nav_acc'>
+                  <div className='nav_acc' onClick={()=>navigate('/profile')}>
                     <AccountCircleIcon />
                     <p>Account</p>
-                  </div>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <div className='nav_acc'>
-                  <InsertDriveFileIcon />
-                    <p>Reports</p>
                   </div>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
@@ -113,7 +108,7 @@ export default function Navbar(){
           <div className='nav_icons'>
             <div className='nav_sub_mobile_logo_text'>
               <img src={LogoBlue} alt='icon' loading='lazy' className='nav_logo_mobile' />
-              <p className='nav_logo_text'>X-Ray Detect</p>
+              <p className='nav_logo_text'>Lung-Disease Detect</p>
             </div>
             {toggle ?<MenuIcon className='nav_menu_logo' style={{fontSize:'36px'}} onClick={handleToggle}/> : <ClearSharpIcon className='nav_menu_logo' style={{fontSize:'36px'}} onClick={handleToggle} />  }
           </div>
@@ -121,17 +116,17 @@ export default function Navbar(){
            t ? 
            <div className='nav_sub_mobile'>
             <p onClick={()=>navigate('/upload')}>Upload</p>
-            <div className='nav_btn_mobile'>
-              <p onClick={()=>navigate('/login')}>Login</p>
+            <div className='nav_btn_mobile' onClick={()=>navigate('/login')}>
+              <p >Login</p>
             </div>
-            <div className='nav_btn_mobile'>
-              <p onClick={()=>navigate('/register')}>Signup</p>
+            <div className='nav_btn_mobile' onClick={()=>navigate('/register')}>
+              <p >Signup</p>
             </div>
           </div> :
           <div className='nav_sub_mobile'>
             <p onClick={()=>navigate('/upload')}>Upload</p>
-            <div className='nav_btn_mobile'>
-              <p>Account</p> 
+            <div className='nav_btn_mobile' onClick={()=>navigate('/profile')}>
+              <p >Account</p> 
             </div>
           </div> :
           <></>}

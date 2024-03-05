@@ -27,6 +27,7 @@ export default function Register() {
 
     const [firstname,setFirstname] = useState("")
     const [lastname,setLastname] = useState("")
+    const [age,setAge] = useState("")
     const [email,setEmail] = useState("")
     const [password,setPassword]= useState("")
     const [conformpassword,setconformpassword]= useState("")
@@ -35,6 +36,7 @@ export default function Register() {
     const [formErrors, setFormErrors] = useState({
         firstname:"",
         lastname:"",
+        age:"",
         email: "",
         password: "",
         conformpassword:""
@@ -46,6 +48,7 @@ export default function Register() {
         const newFormErrors = {
           firstname: "",
           lastname: "",
+          age:"",
           email: "",
           password: "",
           conformpassword: "",
@@ -61,6 +64,11 @@ export default function Register() {
           newFormErrors.lastname = "Please enter your lastname.";
           isValid = false;
         }
+
+        if (!age) {
+            newFormErrors.age = "Please enter your Age.";
+            isValid = false;
+          }
     
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email) {
@@ -149,6 +157,12 @@ export default function Register() {
                         <input type='text' className='input' value={lastname}
                         onChange={(e) => setLastname(e.target.value)}/>
                         {formErrors.lastname? <p style={{color:'red'}}>{formErrors.lastname}</p> : <></>}
+                    </div>
+                    <div className='field'>
+                        <p style={{color:'#6F7D97',fontSize:'16px'}}>Age</p>
+                        <input type='number' className='input' value={age}
+                        onChange={(e) => setAge(e.target.value)}/>
+                        {formErrors.age? <p style={{color:'red'}}>{formErrors.age}</p> : <></>}
                     </div>
                     <div className='field'>
                         <p style={{color:'#6F7D97',fontSize:'16px'}}>Email</p>
