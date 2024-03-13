@@ -6,6 +6,7 @@ import Jwt from 'jsonwebtoken';
 import { JWT_EXPIRY, JWT_SECRET } from "../../config";
 import { logger } from "../../utilities/logger";
 import path from "path";
+import mongoose from "mongoose";
 const bcrypt = require('bcrypt');
 
 const getJwtToken = (payload: any) => {
@@ -34,25 +35,41 @@ export const uploadScan = async (files: Express.Multer.File[], userId: string) =
             filePath: uploadDir,
             result: 'Pending'
         };
-        fs.mkdirSync(uploadDir, { recursive: true }); 
-        fs.writeFile(data.filePath +'/'+ data.fileName, file.buffer, async (err) => {
+        await fs.mkdirSync(uploadDir, { recursive: true }); 
+        await fs.promises.writeFile(data.filePath +'/'+ data.fileName, file.buffer, async (err: any) => {
             if (err) {
                 logger.error('Error occurred while writing file to filesystem', err);
-            } else {
-                try {
-                    let attachment = await Attachment.create(data);
-                    if (userId) {
-                        await User.findOneAndUpdate({ _id: userId }, { $push: { attachments: attachment._id } });
-                    }
-                } catch (error) {
-                    logger.error('Error occurred while creating attachment record', error);
-                }
             }
         });
-        return true;
+        let attachment : any
+        try {
+            attachment = await Attachment.create(data);
+            if (userId) {
+                await User.findOneAndUpdate({ _id: userId }, { $push: { attachments: attachment._id } });
+            }
+        } catch (error) {
+            logger.error('Error occurred while creating attachment record', error);
+        }
+        return attachment._id;
     } catch (err) {
         logger.error('Error occurred while uploading image', err);
         return false;
+    }
+};
+
+export const resultData = async (attachmentId: string) => {
+    try {
+        const lastRecord = await Attachment.findOne({ _id: new mongoose.Types.ObjectId(attachmentId) }).lean();
+        if (lastRecord) {
+            const result = lastRecord.result;
+            return result;
+        } else {
+            console.error('No records found');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching user result:', error);
+        return null;
     }
 };
 
@@ -94,4 +111,43 @@ export const login = async ( data : { email : string, password : string} ) =>{
         logger.error('Error Occured during logIn ',err)
         return({ error : err ,code : code})
     }
+}
+
+export const getGraphData = async () => {
+    return Attachment.aggregate([
+        {
+            $match:
+            {
+                result: {
+                    $ne: "Pending",
+                },
+            },
+        },
+        {
+            $group: {
+                _id: {
+                    result: "$result",
+                    month: {
+                        $month: "$createdAt",
+                    },
+                    year: {
+                        $year: "$createdAt",
+                    },
+                },
+                count: {
+                    $count: {},
+                },
+            },
+        },
+        {
+            $project:
+            {
+                _id: 0,
+                result: "$_id.result",
+                count: "$count",
+                month: "$_id.month",
+                year: "$_id.year",
+            },
+        },
+    ])
 }

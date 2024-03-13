@@ -22,6 +22,8 @@ export default function Upload() {
 
     const [imagePreview, setImagePreview] = React.useState(null);
 
+    const[id,setId] = React.useState(null)
+
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -39,12 +41,26 @@ export default function Upload() {
             'userId' :localStorage.getItem('userId')
           }
         });
+        setId(response.data)
         console.log('Image uploaded successfully:', response.data);
       } catch (error) {
         console.error('Error uploading image:', error);
       }
     }
   };
+  const [result, setResult] = React.useState('');
+
+  const handleResult = async () => {
+    try {
+      console.log(id);
+      const response = await axios.get(`http://localhost:8800/api/public/result/${id}`);
+      
+      setResult(response.data);
+    } catch (error) {
+      console.error('Error fetching result:', error);
+    }
+  }
+
 
   return (
     <div className='upload_main'>
@@ -67,13 +83,13 @@ export default function Upload() {
             <p className='image_preview_text'>Image Preview</p>
             {imagePreview && ( <div className='image'>
             <img src={imagePreview} alt="Preview" className='previewd_image' />
-            <button type='button' className='image_preview_btn'>Get Results</button>
+            <button type='button' onClick={handleResult} className='image_preview_btn'>Get Results</button>
             </div>)}
           </div>
-        <div className='image_sub_preview'>
+        {result ?<div className='image_sub_preview'>
             <p className='status'>Status:</p>
-            <p className='infected'>Pneumonia Infected</p>
-        </div>
+            <p className='infected'>{result}</p>
+        </div>:<></>}
        </div> 
        }
         

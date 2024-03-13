@@ -1,7 +1,7 @@
 import { Controller, Get, Middleware, Post } from "@overnightjs/core";
 import express, { NextFunction, Response } from "express";
 import { initializeMulter } from "../../utilities/multer";
-import { login, signUp, uploadScan } from "./public.service";
+import { getGraphData, login, resultData, signUp, uploadScan } from "./public.service";
 import path from "path";
 
 @Controller('api/public')
@@ -14,7 +14,7 @@ export class PublicController {
         const fileData : any = req.files as Express.Multer.File[] 
         const result = await uploadScan(fileData,req?.headers?.userid);
         if(result) {
-            res.json('Uploaded Successfully');
+            res.json(result);
         }
         else {
             res.json('not uploaded')
@@ -41,5 +41,24 @@ export class PublicController {
         else{
             res.status(jwtToken?.code).json( jwtToken?.error )
         }
+    }
+
+    @Get('result/:id')
+    async result(req: any, res: Response) {
+        const p = req?.params?.id;
+        const result = await resultData(p);
+        
+        if(result) {
+            res.json(result);
+        }
+        else {
+            res.json('data not accessible')
+        }
+    }
+
+    @Get('graph-data')
+    async getGraphData(req : any , res: Response) {
+        const data = await getGraphData()
+        res.json(data)
     }
 }
