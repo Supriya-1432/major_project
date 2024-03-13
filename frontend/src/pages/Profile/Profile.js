@@ -94,7 +94,7 @@ export default function Profile() {
                     { history.map((data) => {
                         return (
                         <div className='reports'>
-                            <p style={{fontSize:'18px'}}><span style={{fontWeight:'bold'}}>Date:</span><br/>{data.createdAt}</p>
+                            <p style={{fontSize:'18px'}}><span style={{fontWeight:'bold'}}>Date:</span><br/>{new Date(data.createdAt).toLocaleDateString()}</p>
                             <img src={`http://localhost:8800/images/${data.fileName}`} alt='history' className='history_image' />
                             <p style={{fontSize:'18px'}}><span style={{fontWeight:'bold'}}>Result:</span> <br/>{data.result}</p>
                         </div>)

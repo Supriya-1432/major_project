@@ -51,7 +51,7 @@ export default function Upload() {
         <p className='upload_head'>Upload IMAGE</p>
         <p className='upload_text'>Unleash the power of our tool by effortlessly uploading your chest x-ray images. Seamlessly detect and analyze for Viral Pneumonia,
              Bacterial Pneumonia, Tuberculosis, COVID and its severity levels with just a few clicks.</p>
-        <Button
+        {imagePreview == null ? <Button
             component="label"
             role={undefined}
             variant="contained"
@@ -61,7 +61,7 @@ export default function Upload() {
             >
             Upload file
             <VisuallyHiddenInput type="file" onChange={handleFileChange}  />
-        </Button>
+        </Button> : 
         <div className='image_preview'>
           <div className='image_sub_preview'>
             <p className='image_preview_text'>Image Preview</p>
@@ -74,7 +74,9 @@ export default function Upload() {
             <p className='status'>Status:</p>
             <p className='infected'>Pneumonia Infected</p>
         </div>
-       </div>
+       </div> 
+       }
+        
     </div>
   )
 }
